@@ -22,6 +22,12 @@ export class LeitorComponent implements OnInit {
         aspectRatio: { min: 1, max: 100 },
         facingMode: 'environment', // or user
       },
+      area: { // defines rectangle of the detection/localization area
+        top: '-20%',    // top offset
+        right: '0%',  // right offset
+        left: '0%',   // left offset
+        bottom: '0%'  // bottom offset
+      },
       singleChannel: false // true: only the red color-channel is read
     },
     locator: {

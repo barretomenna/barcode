@@ -5,10 +5,12 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build",
+    "build": "rm -rf dist && ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "https": "cd dist && serve-https --port 5000",
+    "dev": "npm run build && npm run https"
   },
   "private": true,
   "dependencies": {
