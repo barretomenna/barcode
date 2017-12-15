@@ -52,7 +52,7 @@ export class LeitorComponent implements OnInit {
 
     Quagga.init(this.configQuagga, (err) => {
       if (err) {
-        return alert(err);
+        return console.log(err);
       }
       Quagga.start();
       alert('Barcode: initialization finished. Ready to start');
