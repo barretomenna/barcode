@@ -10,20 +10,21 @@ import Quagga from 'quagga';
 export class LeitorComponent implements OnInit {
 
   @ViewChild('teste') teste: ElementRef;
+  showScanerArea: boolean;
   barcode = '';
+  codigoLido: any;
   configQuagga = {
     inputStream: {
-      name: 'Live',
       type: 'LiveStream',
       target: '#inputBarcode',
       constraints: {
         width: { min: 640 },
         height: { min: 480 },
-        aspectRatio: { min: 1, max: 100 },
+        aspectRatio: { min: 1, max: 2 },
         facingMode: 'environment', // or user
       },
       area: { // defines rectangle of the detection/localization area
-        top: '-20%',    // top offset
+        top: '0%',    // top offset
         right: '0%',  // right offset
         left: '0%',   // left offset
         bottom: '0%'  // bottom offset
@@ -36,8 +37,21 @@ export class LeitorComponent implements OnInit {
     },
     locate: true,
     numOfWorkers: 4,
+    frequency: 10,
     decoder: {
-      readers: ['code_128_reader']
+      readers: [
+        // 'code_128_reader',
+        // 'ean_reader',
+        // 'ean_8_reader',
+        // 'code_39_reader',
+        // 'code_39_vin_reader',
+        // 'codabar_reader',
+        // 'upc_reader',
+        // 'upc_e_reader',
+        // 'i2of5_reader',
+        '2of5_reader',
+        // 'code_93_reader'
+      ]
     }
   };
 
@@ -49,6 +63,7 @@ export class LeitorComponent implements OnInit {
   }
 
   startScanner() {
+    this.showScanerArea = true;
     this.barcode = '';
     this.ref.detectChanges();
 
@@ -61,7 +76,6 @@ export class LeitorComponent implements OnInit {
         return console.log(err);
       }
       Quagga.start();
-      alert('Barcode: initialization finished. Ready to start');
     });
   }
 
@@ -94,10 +108,25 @@ export class LeitorComponent implements OnInit {
     if (this.barcode !== code) {
       this.barcode = 'Code-barres EAN : ' + code;
       this.ref.detectChanges();
+      this.codigoLido = code;
       console.log(this.barcode);
+      this.showScanerArea = false;
       Quagga.stop();
     }
 
   }
-
 }
+
+
+
+'code_128_reader'
+'ean_reader'
+'ean_8_reader'
+'code_39_reader'
+'code_39_vin_reader'
+'codabar_reader'
+'upc_reader'
+'upc_e_reader'
+'i2of5_reader'
+'2of5_reader'
+'code_93_reader'

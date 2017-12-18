@@ -1,3 +1,8 @@
 <div class="teste" id="inputBarcode" #teste>
+   <div [ngClass]="{'areaselecao': showScanerArea}"></div>
 </div>
-<button (click)="startScanner()">iniciar scanner</button>
+<div class="resposta">
+   codigo lido : {{codigoLido}}
+</div>
+
+<button class="init" (click)="startScanner()">iniciar scanner</button>

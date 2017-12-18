@@ -1,7 +1,45 @@
-.teste{
-   position: relative;
-   height: 300px;
-   width: 300px;
-   border: 2px solid black;
+canvas{
+   position: fixed !important;
+   top: -10px !important;
+   left: -10px !important;
+   z-index: 999 !important;
+}
 
+.teste{
+   position: absolute;
+   height: 300px;
+   width: 90vw;
+   border: 2px solid black;
+   overflow: hidden;
+}
+
+.resposta{
+   position: relative;
+   top: 320px;
+}
+
+.init{
+   position: relative;
+   top: 330px;
+}
+
+.areaselecao{
+   position: absolute;
+   height: 150px;
+   width: 90%;
+   left: 15px;
+   top: 75px;
+   border: 2px solid black;
+   z-index: 800;
+}
+
+.areaselecao::after{
+   content: '';
+   position: absolute;
+   width: 100%;
+   height: 3px;
+   background: red;
+   top: 75px;
+   left: 0;
+   z-index: 801;
 }
