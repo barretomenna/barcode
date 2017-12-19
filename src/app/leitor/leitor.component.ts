@@ -15,31 +15,35 @@ export class LeitorComponent implements OnInit {
   codigoLido: any;
   configQuagga = {
     inputStream: {
+      name: 'Live',
       type: 'LiveStream',
       target: '#inputBarcode',
       constraints: {
         width: { min: 640 },
         height: { min: 480 },
-        aspectRatio: { min: 1, max: 2 },
+        aspectRatio: { min: 1, max: 200 },
         facingMode: 'environment', // or user
       },
-      area: { // defines rectangle of the detection/localization area
-        top: '0%',    // top offset
-        right: '0%',  // right offset
-        left: '0%',   // left offset
-        bottom: '0%'  // bottom offset
-      },
-      singleChannel: false // true: only the red color-channel is read
+      // area: { // defines rectangle of the detection/localization area
+      //   top: '0%',    // top offset
+      //   right: '0%',  // right offset
+      //   left: '0%',   // left offset
+      //   bottom: '0%'  // bottom offset
+      // },
+      singleChannel: false, // true: only the red color-channel is read
+      size: 900
     },
     locator: {
       patchSize: 'medium',
-      halfSample: true
+      halfSample: false
     },
     locate: true,
+    src: null,
     numOfWorkers: 4,
-    frequency: 10,
+    // frequency: 10,
     decoder: {
       readers: [
+        { 'format': 'i2of5_reader', 'config': {} },
         // 'code_128_reader',
         // 'ean_reader',
         // 'ean_8_reader',
@@ -49,7 +53,7 @@ export class LeitorComponent implements OnInit {
         // 'upc_reader',
         // 'upc_e_reader',
         // 'i2of5_reader',
-        '2of5_reader',
+        // '2of5_reader',
         // 'code_93_reader'
       ]
     }
@@ -57,17 +61,14 @@ export class LeitorComponent implements OnInit {
 
   constructor(private ref: ChangeDetectorRef) { }
 
-  ngOnInit() {
-    console.log('Barcode: initialization');
-    console.log(this.teste);
-  }
+  ngOnInit() { }
 
   startScanner() {
     this.showScanerArea = true;
     this.barcode = '';
     this.ref.detectChanges();
 
-    Quagga.onProcessed((result) => this.onProcessed(result));
+    // Quagga.onProcessed((result) => this.onProcessed(result));
 
     Quagga.onDetected((result) => this.logCode(result));
 
@@ -119,14 +120,14 @@ export class LeitorComponent implements OnInit {
 
 
 
-'code_128_reader'
-'ean_reader'
-'ean_8_reader'
-'code_39_reader'
-'code_39_vin_reader'
-'codabar_reader'
-'upc_reader'
-'upc_e_reader'
-'i2of5_reader'
-'2of5_reader'
-'code_93_reader'
+// 'code_128_reader'
+// 'ean_reader'
+// 'ean_8_reader'
+// 'code_39_reader'
+// 'code_39_vin_reader'
+// 'codabar_reader'
+// 'upc_reader'
+// 'upc_e_reader'
+// 'i2of5_reader'
+// '2of5_reader'
+// 'code_93_reader'
